@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+function printContent(el){
+	var restorepage = document.body.innerHTML;
+	var printcontent = document.getElementById(el).innerHTML;
+		document.body.innerHTML = printcontent;
+		window.print();
+		document.body.innerHTML = restorepage;}
+		
+function printWhole(){
+	window.print();}
+
+/*	
+var p = document.querySelector('div'); // element to make resizable
+
+div.addEventListener('click', function init() {
+    p.removeEventListener('click', init, false);
+    p.className = p.className + ' resizable';
+    var resizer = document.createElement('div');
+    resizer.className = 'resizer';
+    p.appendChild(resizer);
+    resizer.addEventListener('mousedown', initDrag, false);
+}, false);
+
+
+
+
+
+var startX, startY, startWidth, startHeight;
+
+function initDrag(e) {
+   startX = e.clientX;
+   startY = e.clientY;
+   startWidth = parseInt(document.defaultView.getComputedStyle(p).width, 10);
+   startHeight = parseInt(document.defaultView.getComputedStyle(p).height, 10);
+   document.documentElement.addEventListener('mousemove', doDrag, false);
+   document.documentElement.addEventListener('mouseup', stopDrag, false);
+}
+
+function doDrag(e) {
+   p.style.width = (startWidth + e.clientX - startX) + 'px';
+   p.style.height = (startHeight + e.clientY - startY) + 'px';
+}
+
+function stopDrag(e) {
+    document.documentElement.removeEventListener('mousemove', doDrag, false);
+    document.documentElement.removeEventListener('mouseup', stopDrag, false);
+}	
+	
+*/	
+	
+	
+	
+	
+	
+		
+</script>
+</head>
+<style>
+@page { size: auto;  margin: 0mm; }
+
+#divcon {
+  position: absolute;
+  z-index: 9;
+  background-color: #f1f1f1;
+  text-align: center;
+  border: 1px solid #d3d3d3;
+}
+
+#mydiv {
+  position: absolute;
+  z-index: 9;
+  background-color: #f1f1f1;
+  text-align: center;
+  border: 1px solid #d3d3d3;
+}
+
+#divconheader {
+  padding: 10px;
+  cursor: move;
+  z-index: 10;
+  background-color: #2196F3;
+  color: #fff;
+}
+
+
+
+
+#mydivheader {
+  padding: 10px;
+  cursor: move;
+  z-index: 10;
+  background-color: #2196F3;
+  color: #fff;
+}
+
+#divcon{
+    resize: both;
+    overflow: auto;
+	}
+
+#mydiv {
+    resize: both;
+    overflow: auto;
+}
+
+
+/*
+p { background: lime; height: 200px; width: 300px; }
+p.resizable { background: cyan; position: relative; }
+p .resizer { width: 10px; height: 10px; background: blue; position:absolute; right: 0; bottom: 0; cursor: se-resize; }
+
+*/
+
+
+
+/* The sidebar menu */
+.sidenav {
+  height: 100%; /* Full-height: remove this if you want "auto" height */
+  width: 160px; /* Set the width of the sidebar */
+  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+  z-index: 1; /* Stay on top */
+  top: 0; /* Stay at the top */
+  right: 0;
+  background-color: #111; /* Black */
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 20px;
+}
+
+/* The navigation menu links */
+.sidenav a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+/* Style page content */
+.main {
+  margin-left: 160px; /* Same as the width of the sidebar */
+  padding: 0px 10px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+
+
+
+</style>
+<body>
+
+<h1>Draggable DIV Element</h1>
+
+<div id="divcon">
+<div id="divconheader">Container Page</div>
+  
+</div>
+<div id="mydiv">
+  <div id="mydivheader">Click here to move</div>
+  </br>Move
+  </br>this
+  </br>DIV
+</div>
+
+</div>
+<script>
+//Make the DIV element draggagle:
+dragElement(document.getElementById("divcon"));
+dragElement(document.getElementById("mydiv"));
+
+function dragElement(elmnt) {
+  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+  if (document.getElementById(elmnt.id + "header")) {
+    /* if present, the header is where you move the DIV from:*/
+    document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+  } else {
+    /* otherwise, move the DIV from anywhere inside the DIV:*/
+    elmnt.onmousedown = dragMouseDown;
+  }
+
+  function dragMouseDown(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // get the mouse cursor position at startup:
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    document.onmouseup = closeDragElement;
+    // call a function whenever the cursor moves:
+    document.onmousemove = elementDrag;
+  }
+
+  function elementDrag(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // calculate the new cursor position:
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    // set the element's new position:
+    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+  }
+
+  function closeDragElement() {
+    /* stop moving when mouse button is released:*/
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
+}
+</script>
+<!-- Side navigation -->
+<div class="sidenav">
+  <a href="#">About</a>
+  <a href="#">Services</a>
+  <a href="#">Clients</a>
+  <a href="#">Contact</a>
+  
+  <footer>
+<button onclick = "printContent('divcon')">Print Check</button>
+<button onclick = "printWhole()">Print Page</button>
+</footer>
+
+  
+</div>
+
+<!-- Page content -->
+<div class="main">
+  ...
+</div>
+</body>
+</html>
