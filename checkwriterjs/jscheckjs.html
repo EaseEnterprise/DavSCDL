@@ -1,0 +1,45 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="chk.css">
+</head>
+<body>
+<h1>CHECK DISBURSEMENTS</h1>
+
+<div id="divcon">
+<div id="divconheader"></div>
+<input type="text" id="amount" name="towords" />
+</div>
+
+<div id="mydiv">
+<div id="mydivheader">Check Voucher</div>
+  
+</div>
+</div>
+
+<!--Make the DIV element draggagle:-->
+<script src="chk.js"></script>
+
+
+<!-- Side navigation -->
+<div class="sidenav">
+  <a href="#">Bank Monitoring</a>
+  <a href="#">Purchases</a>
+  <a href="#">Withholding Taxes</a>
+  <a href="#">Professional Fees</a>
+  
+  <footer>
+<button onclick = "printContent('divcon')">Print Check</button>
+<button onclick = "printWhole()">Print Page</button>
+</footer>
+
+  
+</div>
+
+<!-- Page content -->
+<div class="main">
+  ...
+</div>
+</body>
+</html>
